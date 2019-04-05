@@ -1,3 +1,4 @@
+*.h5
 /singlesofa_data.h5
 /mymodel.h5
 /.idea/
