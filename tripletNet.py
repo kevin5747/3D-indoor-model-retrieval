@@ -1,9 +1,9 @@
 import numpy as np
 import tensorflow.keras as keras
-from model.create_model import create_model
-from tensorflow.keras.optimizers import SGD,Adam
+from model.create_model import create_model, triplet_loss
+from tensorflow.python.keras.optimizers import SGD,Adam
 from model.graph import LossHistory
-from tensorflow.keras import backend as K
+from tensorflow.keras.models import load_model
 import matplotlib.pyplot as plt
 from scipy.interpolate import spline, interp1d
 import h5py
@@ -25,6 +25,7 @@ def plot_loss(lossList):
 
 
 model = create_model()
+model.load_weights('my_model_weights.h5')
 model.compile(optimizer=SGD(lr=0.0001, momentum=0.9))
 
 
@@ -42,7 +43,7 @@ STEPS_PER_EPOCH = int(TOTAL_STEPS/BATCH_SIZE)+1
 for i in range(0,EPOCHS):
     if i != 0:
         plot_loss(lossList)
-        model.save('mymodel.h5')
+        model.save_weights('my_model_weights.h5')
     for j in range(0,STEPS_PER_EPOCH):
         start = j*BATCH_SIZE
         end = (j+1)*BATCH_SIZE

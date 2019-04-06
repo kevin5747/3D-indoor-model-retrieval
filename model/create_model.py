@@ -26,7 +26,7 @@ def create_model():
     negative_input = Input(shape=(224, 224, 3), dtype='float32', name='negative_input')
 
     FEATURE_NUM = 1024
-    base_model = InceptionV3(weights='model/weights/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5',
+    base_model = InceptionV3(weights=r'D:\python\model-search\model\weights\inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5',
                              include_top=False)
     x = base_model.output
     x = GlobalAveragePooling2D(name='avg_pool')(x)
